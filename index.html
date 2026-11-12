@@ -1,0 +1,439 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SIAD | PT LANA NUSANTARA</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app-shell">
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <a class="brand-home-link" href="../index.html" title="Kembali ke beranda perusahaan">
+        <div class="brand-logo"><img src="../assets/logo-lana.png" alt="Logo PT LANA NUSANTARA"></div>
+        <div class="brand-text">
+          <strong>PT LANA NUSANTARA</strong>
+          <span>Sistem Informasi Arsip Digital</span>
+        </div>
+      </a>
+      <button class="icon-btn mobile-close" id="closeSidebar">×</button>
+    </div>
+
+    <div class="nav-label">MENU UTAMA</div>
+    <nav class="nav-menu">
+      <button class="nav-item active" data-page="surat-masuk">
+        <span class="nav-icon">✉</span> Surat Masuk
+      </button>
+      <button class="nav-item" data-page="surat-keluar">
+        <span class="nav-icon">➤</span> Surat Keluar
+      </button>
+      <button class="nav-item" data-page="disposisi">
+        <span class="nav-icon">⇢</span> Disposisi
+      </button>
+      <button class="nav-item" data-page="klasifikasi">
+        <span class="nav-icon">▤</span> Klasifikasi Arsip
+      </button>
+    </nav>
+
+    <div class="nav-label">PENGELOLAAN</div>
+    <nav class="nav-menu">
+      <button class="nav-item" data-page="pengguna">
+        <span class="nav-icon">♙</span> Pengelola Akun Pengguna
+      </button>
+      <button class="nav-item" data-page="notifikasi">
+        <span class="nav-icon">♧</span> Notifikasi
+        <span class="notification-dot"></span>
+      </button>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="help-card">
+        <strong>Butuh bantuan?</strong>
+        <span>Hubungi administrator sistem.</span>
+      </div>
+      <div class="user-card">
+        <div class="avatar">P</div>
+        <div class="user-info">
+          <strong id="sidebarUserRole">Pimpinan</strong>
+          <span id="sidebarUserHint">Anda masuk sebagai Pimpinan</span>
+        </div>
+      </div>
+      <button class="logout-btn" id="logoutButton">↪ Keluar dari Sistem</button>
+    </div>
+  </aside>
+
+  <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+  <!-- AREA KONTEN -->
+  <main class="main-area">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="icon-btn menu-toggle" id="menuToggle">☰</button>
+        <div class="breadcrumb">SIAD <span>›</span> <strong id="breadcrumbCurrent">Surat Masuk</strong></div>
+      </div>
+      <div class="topbar-right">
+        <a class="home-company-link" href="../index.html" title="Kembali ke beranda perusahaan">⌂ Beranda</a>
+        <div class="today-date" id="todayDate"></div>
+        <button class="notification-button" data-page="notifikasi">♧<span></span></button>
+        <button class="top-user profile-shortcut" id="openUserProfile" type="button" title="Lihat profil pengguna">
+          <div class="avatar small-avatar">P</div>
+          <div><strong id="topUserRole">Pimpinan</strong><span id="topUserHint">Area Pimpinan · Profil</span></div>
+        </button>
+      </div>
+    </header>
+
+    <div class="page-content">
+
+      <!-- HALAMAN 1: DASHBOARD -->
+      <section class="page-view" id="page-dashboard" hidden>
+        <div class="welcome-header">
+          <div>
+            <div class="eyebrow" id="dashboardEyebrow">DASHBOARD PIMPINAN</div>
+            <h1 id="dashboardWelcome">Selamat Datang, Pimpinan!</h1>
+            <p id="dashboardIntro">Anda masuk sebagai <strong>Pimpinan</strong>. Pantau pengelolaan surat dan tindak lanjut kearsipan di sini.</p>
+          </div>
+          <div class="welcome-date">
+            <span>Hari ini</span>
+            <strong id="welcomeDate"></strong>
+          </div>
+        </div>
+
+        <div class="section-heading dashboard-menu-heading">
+          <div><h2>Akses Cepat</h2><p>Pilih menu untuk mulai mengelola informasi dan arsip perusahaan.</p></div>
+        </div>
+        <div class="dashboard-menu-grid">
+          <button class="dashboard-menu-card" data-page="surat-masuk"><span class="dashboard-menu-icon">✉</span><strong>Surat Masuk</strong><small>Catat dan telusuri surat diterima</small><span class="dashboard-menu-arrow">↗</span></button>
+          <button class="dashboard-menu-card" data-page="surat-keluar"><span class="dashboard-menu-icon">➤</span><strong>Surat Keluar</strong><small>Kelola surat yang diterbitkan</small><span class="dashboard-menu-arrow">↗</span></button>
+          <button class="dashboard-menu-card" data-page="disposisi"><span class="dashboard-menu-icon">⇢</span><strong>Disposisi</strong><small>Pantau arahan dan tindak lanjut</small><span class="dashboard-menu-arrow">↗</span></button>
+          <button class="dashboard-menu-card" data-page="klasifikasi"><span class="dashboard-menu-icon">▤</span><strong>Klasifikasi Arsip</strong><small>Cari dan kelola kode klasifikasi</small><span class="dashboard-menu-arrow">↗</span></button>
+          <button class="dashboard-menu-card" data-page="agenda"><span class="dashboard-menu-icon">▦</span><strong>Buku Agenda</strong><small>Lihat agenda persuratan</small><span class="dashboard-menu-arrow">↗</span></button>
+          <button class="dashboard-menu-card" data-page="pengguna"><span class="dashboard-menu-icon">♙</span><strong>Pengelolaan Akun</strong><small>Kelola akun dan peran pengguna</small><span class="dashboard-menu-arrow">↗</span></button>
+          <button class="dashboard-menu-card" data-page="notifikasi"><span class="dashboard-menu-icon">♧</span><strong>Notifikasi</strong><small>Lihat pemberitahuan sistem</small><span class="dashboard-menu-arrow">↗</span></button>
+        </div>
+      </section>
+        </div>
+      </section>
+
+      <!-- HALAMAN 2: SURAT MASUK -->
+      <section class="page-view active" id="page-surat-masuk">
+        <div class="page-title-row">
+          <div>
+            <div class="eyebrow">PENGELOLAAN DOKUMEN</div>
+            <h1>Surat Masuk</h1>
+            <p>Kelola buku agenda, dokumen, dan status tindak lanjut surat masuk.</p>
+          </div>
+          <div class="action-buttons incoming-header-actions"><button class="outline-btn" type="button" id="openApplyDisposition">⇢ Ajukan Disposisi</button><button class="primary-btn" id="openAddLetter" onclick="document.getElementById('letterModal').classList.add('show'); document.body.style.overflow='hidden';">＋ Tambah Surat</button></div>
+        </div>
+
+        <!-- TABEL BUKU AGENDA -->
+        <section class="panel agenda-panel">
+          <div class="agenda-toolbar">
+            <div>
+              <h2>Daftar Buku Agenda Surat Masuk</h2>
+              <p>Data surat yang telah dicatat ke dalam sistem.</p>
+            </div>
+            <div class="table-controls">
+              <label class="search-box">
+                <span>⌕</span>
+                <input type="search" id="letterSearch" placeholder="Cari nomor, pengirim, atau perihal surat...">
+              </label>
+              <select id="statusFilter">
+                <option value="">Semua status</option>
+                <option value="Belum Didisposisi">Belum Didisposisi</option>
+                <option value="Dalam Proses">Dalam Proses</option>
+                <option value="Selesai">Selesai</option>
+              </select>
+              <select id="natureFilter">
+                <option value="">Semua sifat</option>
+                <option value="Penting">Penting</option>
+                <option value="Biasa">Biasa</option>
+                <option value="Rahasia">Rahasia</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="table-scroll">
+            <table class="agenda-table">
+              <thead>
+                <tr>
+                  <th>NO.</th>
+                  <th>TANGGAL TERIMA</th>
+                  <th>NOMOR SURAT</th>
+                  <th>TANGGAL SURAT</th>
+                  <th>DITERIMA DARI / PENGIRIM</th>
+                  <th>PERIHAL</th>
+                  <th>ISI RINGKAS</th>
+                  <th>KODE ARSIP</th>
+                  <th>SIFAT SURAT</th>
+                  <th>STATUS DISPOSISI</th>
+                  <th>AKSI</th>
+                </tr>
+              </thead>
+              <tbody id="incomingTableBody"></tbody>
+            </table>
+          </div>
+
+          <div class="table-footer">
+            <span id="tableResultCount">Menampilkan 5 surat</span>
+            <span>Geser tabel ke samping untuk melihat semua kolom.</span>
+          </div>
+        </section>
+        <div class="security-note">ⓘ Surat bersifat rahasia hanya boleh diakses oleh pengguna yang memiliki izin.</div>
+      </section>
+
+      <!-- HALAMAN 3: SURAT KELUAR -->
+      <section class="page-view" id="page-surat-keluar">
+        <div class="page-title-row">
+          <div>
+            <div class="eyebrow">PENGELOLAAN DOKUMEN</div>
+            <h1>Surat Keluar</h1>
+            <p>Catat surat yang diterbitkan dan dikirim oleh perusahaan.</p>
+          </div>
+          <button class="primary-btn" id="openAddOutgoing" onclick="document.getElementById('outgoingModal').classList.add('show'); document.body.style.overflow='hidden';">＋ Tambah Surat Keluar</button>
+        </div>
+        <section class="panel agenda-panel">
+          <div class="agenda-toolbar">
+            <div><h2>Daftar Buku Agenda Surat Keluar</h2><p>Gunakan pencarian dan filter untuk menemukan surat.</p></div>
+            <div class="table-controls">
+              <label class="search-box"><span>⌕</span><input type="search" id="outgoingSearch" placeholder="Cari surat keluar..."></label>
+              <select id="outgoingStatusFilter"><option value="">Semua status</option><option value="Draft">Draft</option><option value="Disetujui">Disetujui</option><option value="Terkirim">Terkirim</option></select>
+              <select id="outgoingNatureFilter"><option value="">Semua sifat</option><option value="Biasa">Biasa</option><option value="Penting">Penting</option><option value="Rahasia">Rahasia</option></select>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table class="agenda-table outgoing-table">
+              <thead><tr><th>NO.</th><th>TANGGAL KIRIM</th><th>NOMOR SURAT</th><th>TANGGAL SURAT</th><th>PENERIMA</th><th>PERIHAL</th><th>ISI RINGKAS</th><th>KODE ARSIP</th><th>SIFAT SURAT</th><th>STATUS</th><th>AKSI</th></tr></thead>
+              <tbody id="outgoingTableBody"></tbody>
+            </table>
+          </div>
+          <div class="table-footer"><span id="outgoingResultCount">Menampilkan 0 surat</span><span>Data contoh disimpan selama halaman demo berjalan.</span></div>
+        </section>
+      </section>
+
+      <!-- HALAMAN 4: DISPOSISI -->
+      <section class="page-view" id="page-disposisi">
+        <div class="page-title-row">
+          <div>
+            <div class="eyebrow">ARAHAN DAN TINDAK LANJUT</div>
+            <h1>Disposisi</h1>
+            <p>Pantau surat yang membutuhkan arahan pimpinan dan perbarui status tindak lanjutnya.</p>
+          </div>
+        </div>
+        <section class="panel agenda-panel">
+          <div class="agenda-toolbar">
+            <div><h2>Daftar Disposisi Surat</h2><p>Daftar pengajuan disposisi dari Admin dan Sekretaris beserta arahan dan status tindak lanjut Pimpinan.</p></div>
+            <div class="table-controls">
+              <label class="search-box"><span>⌕</span><input type="search" id="dispositionSearch" placeholder="Cari nomor/perihal..."></label>
+              <select id="dispositionStatusFilter"><option value="">Semua status</option><option value="Menunggu Arahan">Menunggu Arahan</option><option value="Dalam Proses">Dalam Proses</option><option value="Selesai">Selesai</option><option value="Ditolak">Ditolak</option></select>
+            </div>
+          </div>
+          <div class="table-scroll">
+            <table class="agenda-table disposition-table">
+              <thead><tr><th>NO.</th><th>NOMOR SURAT</th><th>PERIHAL</th><th>INSTRUKSI</th><th>DITERUSKAN</th><th>TANGGAL PENYELESAIAN</th><th>STATUS</th><th>AKSI</th></tr></thead>
+              <tbody id="dispositionTableBody"></tbody>
+            </table>
+          </div>
+          <div class="table-footer"><span id="dispositionResultCount">Menampilkan 0 disposisi</span><span>Pengajuan Admin/Sekretaris akan muncul di sini. Pimpinan mengisi instruksi dan penerima; Admin/Sekretaris dapat melengkapi tanggal penyelesaian.</span></div>
+        </section>
+      </section>
+      <!-- HALAMAN: KLASIFIKASI ARSIP -->
+      <section class="page-view" id="page-klasifikasi">
+        <div class="page-title-row"><div><div class="eyebrow">PENGATURAN KEARSIPAN</div><h1>Klasifikasi Arsip</h1><p>Daftar kode klasifikasi bertingkat berdasarkan pedoman klasifikasi PT LANA NUSANTARA.</p></div></div>
+        <section class="panel agenda-panel">
+          <div class="agenda-toolbar"><div><h2>Daftar Kode Klasifikasi</h2><p>Pilih kategori, cari kode, atau kelola klasifikasi khusus.</p></div><div class="table-controls"><label class="search-box"><span>⌕</span><input id="classificationSearch" type="search" placeholder="Cari kode atau nama klasifikasi..."></label><select id="classificationCategoryFilter"><option value="">Semua kategori utama</option></select></div></div>
+          <form id="classificationForm" class="inline-entry-form"><input id="classificationEditId" type="hidden"><label>Kode arsip<input id="classificationCode" required placeholder="Contoh: 110.4"></label><label>Nama klasifikasi<input id="classificationName" required placeholder="Nama klasifikasi"></label><label>Kategori utama<select id="classificationCategory" required><option value="100">100 · BISNIS</option><option value="200">200 · KEPEGAWAIAN</option><option value="300">300 · KEUANGAN</option><option value="400">400 · TRANSPORTASI</option><option value="500">500 · SURAT DINAS & KETERANGAN</option><option value="600">600 · SURAT KEPUTUSAN</option><option value="700">700 · RAPAT DAN KEGIATAN</option><option value="800">800 · TEKNOLOGI INFORMASI</option></select></label><button class="primary-btn" type="submit" id="classificationSubmit">＋ Tambah Kode</button><button class="outline-btn" type="button" id="classificationCancel" hidden>Batal Edit</button></form>
+          <div class="table-scroll"><table class="agenda-table"><thead><tr><th>NO.</th><th>KODE KLASIFIKASI</th><th>NAMA KLASIFIKASI</th><th>TINGKAT</th><th>AKSI</th></tr></thead><tbody id="classificationTableBody"></tbody></table></div>
+          <div class="table-footer"><span id="classificationResultCount">0 klasifikasi</span><span>Kode yang telah digunakan oleh surat tidak dapat dihapus.</span></div>
+        </section>
+      </section>
+
+      <!-- PROFIL PENGGUNA -->
+      <section class="page-view" id="page-profil-pengguna">
+        <div class="page-title-row"><div><div class="eyebrow">AKUN AKTIF</div><h1>Profil Pengguna</h1><p>Informasi akun yang sedang masuk ke SIAD.</p></div></div>
+        <section class="panel user-profile-panel" id="userProfilePanel" style="margin-top:18px;padding:24px;border-radius:16px">
+          <div class="page-title-row" style="margin-bottom:16px"><div><div class="eyebrow">AKUN AKTIF</div><h2 style="margin:4px 0">Profil Pengguna</h2><p>Informasi akun yang sedang masuk ke SIAD.</p></div><div class="action-buttons"><button class="outline-btn" type="button" id="editUserProfileBtn">✎ Edit Profil</button><button class="primary-btn" type="button" id="changeUserPasswordBtn">Ubah Password</button></div></div>
+          <div class="action-buttons profile-backup-actions" style="margin:0 0 18px;display:flex;gap:10px;flex-wrap:wrap"><button class="outline-btn" type="button" id="exportSiadBackup">Ekspor Cadangan</button><button class="outline-btn" type="button" id="importSiadBackup">Impor Cadangan</button><input id="importSiadBackupFile" type="file" accept=".json,application/json" hidden></div>
+          <div class="profile-info-grid" id="userProfileDetails"></div>
+          <form id="userProfileEditForm" class="inline-entry-form" hidden style="margin-top:18px"><label>Nama lengkap<input id="profileFullName" required></label><label>NIP / Username<input id="profileNip" required></label><label>Jabatan<input id="profileJob" required></label><label>Alamat<input id="profileAddress"></label><label>No. HP<input id="profilePhone" inputmode="tel"></label><label>Email<input id="profileEmail" type="email"></label><div class="action-buttons"><button class="primary-btn" type="submit">Simpan Profil</button><button class="outline-btn" type="button" id="cancelUserProfileEdit">Batal</button></div></form>
+          <form id="userPasswordForm" class="inline-entry-form" hidden style="margin-top:18px"><label>Password baru<input id="profileNewPassword" type="password" minlength="4" required placeholder="Masukkan password baru"></label><label>Konfirmasi password<input id="profileConfirmPassword" type="password" minlength="4" required placeholder="Ulangi password baru"></label><div class="action-buttons"><button class="primary-btn" type="submit">Simpan Password</button><button class="outline-btn" type="button" id="cancelUserPassword">Batal</button></div></form>
+        </section>
+      </section>
+
+      <!-- BUKU AGENDA: pintasan ke daftar persuratan -->
+      <section class="page-view" id="page-agenda"><div class="page-title-row"><div><div class="eyebrow">AGENDA PERSURATAN</div><h1>Buku Agenda</h1><p>Pilih buku agenda surat masuk atau surat keluar.</p></div></div><div class="dashboard-menu-grid"><button class="dashboard-menu-card" data-page="surat-masuk"><span class="dashboard-menu-icon">✉</span><strong>Agenda Surat Masuk</strong><small>Daftar surat yang diterima</small><span class="dashboard-menu-arrow">↗</span></button><button class="dashboard-menu-card" data-page="surat-keluar"><span class="dashboard-menu-icon">➤</span><strong>Agenda Surat Keluar</strong><small>Daftar surat yang diterbitkan</small><span class="dashboard-menu-arrow">↗</span></button></div></section>
+
+      <!-- HALAMAN 6: PENGELOLAAN AKUN -->
+      <section class="page-view" id="page-pengguna">
+        <div class="page-title-row"><div><div class="eyebrow">PENGATURAN SISTEM</div><h1>Pengelolaan Akun Pengguna</h1><p>Kelola identitas pengguna, peran, dan status akun yang dapat mengakses SIAD.</p></div></div>
+        <div class="incoming-stats"><article class="mini-stat"><div class="mini-stat-icon blue-icon">♙</div><div><span>Total Akun</span><strong id="userTotal">0</strong><small>Seluruh akun terdaftar</small></div></article><article class="mini-stat"><div class="mini-stat-icon green-icon">✓</div><div><span>Akun Aktif</span><strong id="userActive">0</strong><small>Dapat mengakses sistem</small></div></article><article class="mini-stat"><div class="mini-stat-icon orange-icon">⊘</div><div><span>Akun Nonaktif</span><strong id="userInactive">0</strong><small>Akses dinonaktifkan</small></div></article></div>
+        <section class="panel agenda-panel"><div class="agenda-toolbar"><div><h2>Daftar Akun</h2><p>Tambah akun demo, ubah peran, aktifkan/nonaktifkan, atau hapus akun.</p></div><div class="table-controls"><label class="search-box"><span>⌕</span><input id="userSearch" type="search" placeholder="Cari nama/username..."></label></div></div>
+          <form id="userForm" class="inline-entry-form user-entry-form"><input id="userEditId" type="hidden"><label>Nama pengguna<input id="userName" required placeholder="Nama lengkap"></label><label>Username<input id="userUsername" required placeholder="Username unik"></label><label>Peran<select id="userRole" required><option value="Pimpinan">Pimpinan</option><option value="Admin">Admin</option><option value="Sekretaris">Sekretaris</option></select></label><label>Password<input id="userPassword" type="password" placeholder="Isi saat membuat akun"></label><button class="primary-btn" type="submit" id="userSubmit">＋ Tambah Akun</button><button class="outline-btn" type="button" id="userCancel" hidden>Batal Edit</button></form>
+          <div class="table-scroll"><table class="agenda-table"><thead><tr><th>NO.</th><th>NAMA</th><th>USERNAME</th><th>PERAN</th><th>STATUS</th><th>AKSI</th></tr></thead><tbody id="userTableBody"></tbody></table></div><div class="table-footer"><span id="userResultCount">0 akun</span><span>Demo lokal: password tersimpan di browser ini dan wajib cocok saat login.</span></div>
+        </section>
+      </section>
+
+      <!-- HALAMAN 7: NOTIFIKASI -->
+      <section class="page-view" id="page-notifikasi">
+        <div class="page-title-row"><div><div class="eyebrow">PEMBERITAHUAN SISTEM</div><h1>Notifikasi</h1><p>Pemberitahuan aktivitas surat, disposisi, dan pembaruan sistem.</p></div><button class="outline-btn" id="markAllNotifications">✓ Tandai semua dibaca</button></div>
+        <div class="incoming-stats"><article class="mini-stat"><div class="mini-stat-icon blue-icon">♧</div><div><span>Total Notifikasi</span><strong id="notificationTotal">0</strong><small>Semua pemberitahuan</small></div></article><article class="mini-stat"><div class="mini-stat-icon orange-icon">◷</div><div><span>Belum Dibaca</span><strong id="notificationUnread">0</strong><small>Perlu diperiksa</small></div></article><article class="mini-stat"><div class="mini-stat-icon green-icon">✓</div><div><span>Sudah Dibaca</span><strong id="notificationRead">0</strong><small>Telah diperiksa</small></div></article></div>
+        <section class="panel agenda-panel"><div class="agenda-toolbar"><div><h2>Pusat Notifikasi</h2><p>Pilih notifikasi untuk menandainya sebagai sudah dibaca.</p></div><div class="table-controls"><select id="notificationFilter"><option value="">Semua notifikasi</option><option value="unread">Belum dibaca</option><option value="read">Sudah dibaca</option></select></div></div><div class="notification-list" id="notificationList"></div><div class="table-footer"><span id="notificationResultCount">0 notifikasi</span><button class="text-btn" id="clearReadNotifications">Hapus notifikasi yang sudah dibaca</button></div></section>
+      </section>
+
+      <footer class="page-footer">
+        <span>© 2026 PT LANA NUSANTARA · Sistem Informasi Arsip Digital</span>
+        <span>Akses sesuai peran pengguna</span>
+      </footer>
+    </div>
+  </main>
+</div>
+
+<!-- MODAL TAMBAH / EDIT SURAT -->
+<div class="modal-backdrop" id="letterModal">
+  <section class="modal-card large-modal">
+    <div class="modal-heading">
+      <div><div class="eyebrow">FORMULIR SURAT MASUK</div><h2 id="letterModalTitle">Tambah Surat Masuk</h2><p>Lengkapi data surat dan lampirkan dokumennya.</p></div>
+      <button class="icon-btn" id="closeLetterModal">×</button>
+    </div>
+    <form id="letterForm">
+      <input type="hidden" id="editId">
+      <div class="form-grid">
+        <label>Nomor Agenda<input id="formNo" readonly></label>
+        <label>Nomor Surat<input id="formLetterNumber" required placeholder="Contoh: 001/UND/X/2026"></label>
+        <label>Tanggal Terima<input id="formReceivedDate" type="date" required></label>
+        <label>Tanggal Surat<input id="formLetterDate" type="date" required></label>
+        <label class="full-width">Diterima dari / Pengirim<input id="formSender" required placeholder="Nama instansi atau pengirim surat"></label>
+        <label>Perihal<input id="formSubject" required placeholder="Perihal surat"></label>
+        <label>Kode Arsip<input id="formArchiveCode" placeholder="Contoh: UM.01"></label>
+        <label class="full-width">Isi Ringkas<textarea id="formSummary" rows="3" required placeholder="Tuliskan ringkasan isi surat..."></textarea></label>
+        <label>Sifat Surat<select id="formNature"><option value="Biasa">Biasa</option><option value="Penting">Penting</option><option value="Rahasia">Rahasia</option></select></label>
+        <label>Status Disposisi<select id="formStatus"><option value="Belum Didisposisi">Belum Didisposisi</option><option value="Dalam Proses">Dalam Proses</option><option value="Selesai">Selesai</option></select></label>
+        <label class="full-width">Unggah File Surat
+          <input id="formFile" type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png">
+          <small>Format yang didukung: PDF, DOC, DOCX, JPG, PNG. Maksimal 10 MB.</small>
+          <span class="selected-file" id="selectedFile">Belum ada file dipilih.</span>
+        </label>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="outline-btn" id="cancelLetter">Batal</button>
+        <button type="submit" class="primary-btn">Simpan Surat</button>
+      </div>
+    </form>
+  </section>
+</div>
+
+<!-- MODAL TAMBAH / EDIT SURAT KELUAR -->
+<div class="modal-backdrop" id="outgoingModal">
+  <section class="modal-card large-modal">
+    <div class="modal-heading">
+      <div><div class="eyebrow">FORMULIR SURAT KELUAR</div><h2 id="outgoingModalTitle">Tambah Surat Keluar</h2><p>Lengkapi data surat yang diterbitkan perusahaan.</p></div>
+      <button class="icon-btn" id="closeOutgoingModal">×</button>
+    </div>
+    <form id="outgoingForm">
+      <input type="hidden" id="outgoingEditId">
+      <div class="form-grid">
+        <label>Nomor Agenda<input id="outgoingNo" readonly></label>
+        <label>Nomor Surat<input id="outgoingLetterNumber" required placeholder="Contoh: 003/SLN/X/2026"></label>
+        <label>Tanggal Surat<input id="outgoingDate" type="date" required></label>
+        <label>Status Surat<select id="outgoingStatus"><option value="Draft">Draft</option><option value="Disetujui">Disetujui</option><option value="Terkirim">Terkirim</option></select></label>
+        <label class="full-width">Penerima<input id="outgoingRecipient" required placeholder="Nama instansi atau penerima surat"></label>
+        <label>Perihal<input id="outgoingSubject" required placeholder="Perihal surat"></label>
+        <label>Kode Arsip<input id="outgoingArchiveCode" placeholder="Contoh: KS.01"></label>
+        <label>Sifat Surat<select id="outgoingNature"><option value="Biasa">Biasa</option><option value="Penting">Penting</option><option value="Rahasia">Rahasia</option></select></label>
+        <label class="full-width">Isi Ringkas<textarea id="outgoingSummary" rows="3" required placeholder="Ringkasan isi surat keluar..."></textarea></label>
+        <label class="full-width">Unggah File Surat<input id="outgoingFile" type="file" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"><small>PDF, DOC, DOCX, JPG, PNG. Maksimal 10 MB.</small><span class="selected-file" id="outgoingSelectedFile">Belum ada file dipilih.</span></label>
+      </div>
+      <div class="modal-actions"><button type="button" class="outline-btn" id="cancelOutgoing">Batal</button><button type="submit" class="primary-btn">Simpan Surat Keluar</button></div>
+    </form>
+  </section>
+</div>
+
+<!-- MODAL LEMBAR DISPOSISI RESMI -->
+<div class="modal-backdrop" id="dispositionSheetModal">
+ <section class="modal-card disposition-sheet-modal">
+  <div class="modal-heading"><div><div class="eyebrow">LEMBAR DISPOSISI</div><h2>Ajukan Disposisi Surat Masuk</h2><p>Pilih surat terlebih dahulu. Data surat akan terisi otomatis dari agenda surat masuk.</p></div><button class="icon-btn" id="closeDispositionSheet">×</button></div>
+  <form id="dispositionSheetForm">
+   <div class="form-grid">
+    <label class="full-width">Pilih Surat Masuk<select id="dispositionSourceLetter" required><option value="">Pilih surat yang akan diajukan</option></select></label>
+    <label>Perihal<input id="sheetSubject" readonly></label><label>Tanggal Penyelesaian<input id="sheetDeadline" type="date"></label>
+    <label>Tanggal Surat<input id="sheetLetterDate" readonly></label><label>Nomor Surat<input id="sheetLetterNumber" readonly></label>
+    <label class="full-width">Asal Surat<input id="sheetSender" readonly></label>
+    <label>Lampiran<input id="sheetAttachment" readonly></label><label>Kode Sifat Surat<select id="sheetNature"><option value="P">P · Penting</option><option value="B">B · Biasa</option><option value="R">R · Rahasia</option></select></label>
+    <label class="full-width">Instruksi Pimpinan<select id="sheetInstruction"><option value="">Pilih Instruksi Pimpinan</option>
+<option>Mohon Ditindaklanjuti</option><option>Segera Ditindaklanjuti</option><option>Mohon Diproses Lebih Lanjut</option><option>Mohon Dipelajari</option><option>Mohon Diperiksa</option><option>Mohon Diverifikasi</option><option>Mohon Dikoordinasikan</option><option>Mohon Dilakukan Konfirmasi</option><option>Mohon Dibuatkan Laporan</option><option>Mohon Dibuatkan Surat Balasan</option><option>Mohon Disiapkan Dokumen Pengiriman</option><option>Mohon Diproses Pengiriman Barang</option><option>Mohon Dilakukan Penjadwalan Pengiriman</option><option>Mohon Dilakukan Pengecekan Barang</option><option>Mohon Dilakukan Pemeriksaan Gudang</option><option>Mohon Dilakukan Pengecekan Stok</option><option>Mohon Dilakukan Koordinasi dengan Kurir</option><option>Mohon Dilakukan Koordinasi dengan Mitra</option><option>Mohon Ditindaklanjuti Keluhan Pelanggan</option><option>Mohon Diselesaikan Permasalahan Pengiriman</option><option>Mohon Dilakukan Evaluasi Operasional</option><option>Mohon Dilakukan Monitoring Pengiriman</option><option>Mohon Segera Diselesaikan</option><option>Mohon Dilaporkan Hasilnya</option><option>Mohon Dilaporkan Perkembangannya</option><option>Mohon Diberikan Rekomendasi</option><option>Mohon Dipersiapkan untuk Tindak Lanjut</option><option>Mohon Dicatat dan Didokumentasikan</option><option>Mohon Diarsipkan</option><option>Untuk Diketahui</option><option>Untuk Menjadi Perhatian</option><option>Sebagai Bahan Pertimbangan</option><option>Tidak Perlu Ditindaklanjuti</option></select></label>
+    <label class="full-width">Diteruskan kepada<select id="sheetAssignedTo"><option value="">Pilih Penerima Disposisi</option>
+<option>Direktur Utama</option><option>Wakil Direktur</option><option>Manajer Operasional</option><option>Supervisor Operasional</option><option>Staf Operasional</option><option>Manajer Logistik</option><option>Supervisor Logistik</option><option>Staf Logistik</option><option>Manajer Pergudangan</option><option>Supervisor Gudang</option><option>Staf Gudang</option><option>Manajer Distribusi</option><option>Supervisor Distribusi</option><option>Staf Distribusi</option><option>Manajer Transportasi</option><option>Supervisor Transportasi</option><option>Staf Transportasi</option><option>Koordinator Kurir</option><option>Kurir / Pengemudi</option><option>Manajer Administrasi</option><option>Staf Administrasi</option><option>Bagian Persuratan</option><option>Bagian Kearsipan</option><option>Manajer Keuangan</option><option>Staf Keuangan</option><option>Manajer SDM</option><option>Staf SDM</option><option>Manajer Customer Service</option><option>Staf Customer Service</option><option>Manajer Pengadaan</option><option>Staf Pengadaan</option><option>Bagian IT</option><option>Bagian Legal</option><option>Unit Kerja Terkait</option><option>Seluruh Unit Kerja</option></select></label>
+   </div>
+   <p class="security-note">Format lembar cetak mengikuti contoh: LEMBAR DISPOSISI, kode P/B/R, data surat, instruksi, diteruskan, serta keterangan kode.</p>
+   <div class="modal-actions"><button type="button" class="outline-btn" id="cancelDispositionSheet">Batal</button><button type="submit" class="primary-btn">Simpan Pengajuan</button></div>
+  </form>
+ </section>
+</div>
+
+<!-- MODAL TINDAK LANJUT DISPOSISI -->
+<div class="modal-backdrop" id="dispositionActionModal">
+  <section class="modal-card">
+    <div class="modal-heading"><div><div class="eyebrow">TINDAK LANJUT</div><h2>Perbarui Disposisi</h2><p id="dispositionActionSubtitle">Perbarui status dan catatan disposisi.</p></div><button class="icon-btn" id="closeDispositionAction">×</button></div>
+    <form id="dispositionActionForm">
+      <input type="hidden" id="dispositionActionId">
+      <div class="form-grid">
+        <label class="full-width">Status Disposisi<select id="dispositionActionStatus" required><option value="Menunggu Arahan">Menunggu Arahan</option><option value="Dalam Proses">Dalam Proses</option><option value="Selesai">Selesai</option><option value="Ditolak">Ditolak</option></select></label>
+        <label class="full-width">Catatan tindak lanjut<textarea id="dispositionActionNote" rows="4" placeholder="Catatan hasil tindak lanjut..."></textarea></label>
+      </div>
+      <div class="modal-actions"><button type="button" class="outline-btn" id="cancelDispositionAction">Batal</button><button type="submit" class="primary-btn">Simpan Perubahan</button></div>
+    </form>
+  </section>
+</div>
+
+<!-- MODAL LIHAT DETAIL -->
+<div class="modal-backdrop" id="detailModal">
+  <section class="modal-card">
+    <div class="modal-heading">
+      <div><div class="eyebrow">INFORMASI DOKUMEN</div><h2>Detail Surat Masuk</h2><p>Informasi surat yang dipilih.</p></div>
+      <button class="icon-btn" id="closeDetailModal">×</button>
+    </div>
+    <div id="detailContent" class="detail-content"></div>
+    <div class="modal-actions">
+      <button class="outline-btn" id="detailViewFile">Lihat Surat</button>
+      <button class="outline-btn" id="detailPrint">Cetak Detail</button>
+      <button class="primary-btn" id="detailClose">Tutup</button>
+    </div>
+  </section>
+</div>
+
+<!-- MODAL HAPUS -->
+<div class="modal-backdrop" id="deleteModal">
+  <section class="modal-card confirm-modal">
+    <div class="delete-symbol">!</div>
+    <h2>Hapus data surat?</h2>
+    <p>Data surat ini akan dihapus dari daftar. Tindakan ini tidak dapat dibatalkan selama sesi demo.</p>
+    <div class="modal-actions">
+      <button class="outline-btn" id="cancelDelete">Batal</button>
+      <button class="danger-btn" id="confirmDelete">Ya, Hapus</button>
+    </div>
+  </section>
+</div>
+
+<!-- MODAL KELUAR -->
+<div class="modal-backdrop" id="logoutModal">
+  <section class="modal-card confirm-modal">
+    <div class="delete-symbol">↪</div>
+    <h2>Keluar dari SIAD?</h2>
+    <p id="logoutConfirmText">Apakah kamu yakin ingin keluar dari sistem?</p>
+    <div class="modal-actions">
+      <button class="outline-btn" id="cancelLogout">Batal</button>
+      <button class="danger-btn" id="confirmLogout">Ya, Keluar</button>
+    </div>
+  </section>
+</div>
+
+<div class="toast" id="toast"></div>
+<script src="script.js"></script>
+</body>
+</html>
